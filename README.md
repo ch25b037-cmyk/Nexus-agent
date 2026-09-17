@@ -113,6 +113,7 @@ Built using Groq / gpt-oss-120b with an iterative ReAct while-loop (`for step in
 - **Scheduled Cron Ingestion:** `APScheduler` background daemon running at `00:00` and `12:00` daily.
 - **Cost Dashboard:** Tracks prompt/completion tokens in `token_usage` table and calculates costs in **Indian Rupees (₹)** per feature.
 - **Comprehensive Evals:** `evaluation/eval_extraction.py` (Field accuracy & Skill F1) and `evaluation/eval_resume_judge.py` (LLM-as-a-Judge audit on resume retrieval).
+- **Deployment:** [NEXUS](https://nexus-agent-onqoj3flw-gokkul.vercel.app/)
 
 ---
 
@@ -123,7 +124,7 @@ Built using Groq / gpt-oss-120b with an iterative ReAct while-loop (`for step in
 | **Backend & APIs** | Python 3.11+, FastAPI (Modular `APIRouter` + `lifespan`), Uvicorn (ASGI) |
 | **Database & Vectors** | PostgreSQL 16 (Supabase), `pgvector` extension (768-dim), SQLAlchemy ORM |
 | **Scraping** | Playwright (Headless Chromium), BeautifulSoup4, HTTPX |
-| **LLM & Inference** | Groq (`openai/gpt-oss-120b` / `llama-3.3-70b`), Tenacity exponential backoff |
+| **LLM & Inference** | Groq (`openai/gpt-oss-120b), Tenacity exponential backoff |
 | **Embeddings** | Google Gemini (`gemini-embedding-001`, MRL 768 dimensions) |
 | **Audio / Voice** | Microsoft Edge-TTS (`en-US-ChristopherNeural`), HeyGen Avatar Video API |
 | **Auth & Security** | PyJWT (HMAC-SHA256), Bcrypt |
@@ -141,7 +142,6 @@ DATABASE_URL=postgresql+psycopg://postgres.<project-ref>:<password>@aws-0-ap-nor
 
 # AI / Inference Keys
 GROQ_API_KEY=gsk_your_groq_api_key_here
-LLM_MODEL=openai/gpt-oss-120b
 GEMINI_API_KEY=your_google_gemini_api_key_here
 
 # Audio / Video Keys
@@ -157,7 +157,7 @@ JWT_SECRET_KEY=nexus-super-secret-jwt-key-2026
 
 ### 1. Clone & Python Environment
 ```bash
-git clone https://github.com/your-username/nexus-career-agent.git
+git clone https://github.com/your-username/Nexus-agent.git
 cd nexus-career-agent
 
 # Create and activate virtual environment
@@ -177,7 +177,7 @@ python -c "from app.db.session import engine, Base; import app.models; Base.meta
 
 ### 3. Run Ingestion (Populate Database)
 ```bash
-python Utils/run_all_sources.py   # Ingests jobs from python.org and Playwright
+python Utils/run_all_sources.py   # Ingests jobs from python.org and Github
 python Utils/run_extraction.py    # Runs LLM structured extraction
 python Utils/run_embed_jobs.py     # Computes 768-dim vector embeddings
 ```
@@ -215,9 +215,5 @@ In accordance with Section 4.4 requirements, the following are known trade-offs 
 
 2. **HeyGen Free Credits:** Video generation relies on HeyGen's API. Because free trial credits expire quickly, the system is architected with an automated fallback to neural Edge-TTS audio.
 
-```
-# Deployed Link at Vercel(frontend) and Render(fastAPI)
-https://nexus-agent-onqoj3flw-gokkul.vercel.app/
----
 
 
