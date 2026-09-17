@@ -72,6 +72,8 @@ export const api = {
 
   removeFromShortlist: (shortlistId) => 
     request(`/api/shortlist/${shortlistId}`, { method: "DELETE" }),
+  getJobs: (category = "All") => 
+    request(category === "All" ? "/api/jobs?limit=102" : `/api/jobs?category=${encodeURIComponent(category)}&limit=102`),
 
   // --- 4. Agent & ChatGPT-Style Sessions ---
   chatWithAgent: (message, history = [], session_id = null) => 
