@@ -4,17 +4,20 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-# Load .env variables
 load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
-
 if not DATABASE_URL:
-    raise ValueError("[!] DATABASE_URL is not set. Check your .env file.")
+    raise ValueError("[!] DATABASE_URL is not set.")
+
+# Tells SQLAlchemy to use psycopg (v3) which is installed on Render!
+db_url = DATABASE_URL
+if db_url.startswith("postgresql://"):
+    db_url = db_url.replace("postgresql://", "postgresql+psycopg://", 1)
 
 engine = create_engine(
-    DATABASE_URL,
-    pool_pre_ping=True,  # Automatically tests connection before querying to avoid dead drops
+    db_url,
+    pool_pre_ping=True,
     pool_size=5,
     max_overflow=10
 )
@@ -22,9 +25,7 @@ engine = create_engine(
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
-
 def get_db():
-    """Dependency helper for getting a database session."""
     db = SessionLocal()
     try:
         yield db
