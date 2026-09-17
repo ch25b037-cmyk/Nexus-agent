@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import MatchesPage from './pages/Matchespage';
-import ChatPage from './pages/ChatPage';
-import ShortlistPage from './pages/ShortlistPage';
+import ChatPage from './pages/chatpage';
+import ShortlistPage from './pages/Shortlistpage';
 import LoginPage from './pages/loginPage';
 import { api } from './api';
 
