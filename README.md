@@ -216,7 +216,8 @@ In accordance with Section 4.4 requirements, the following are known trade-offs 
 2. **HeyGen Free Credits:** Video generation relies on HeyGen's API. Because free trial credits expire quickly, the system is architected with an automated fallback to neural Edge-TTS audio.
 
 ```
-
+# Deployed Link at Vercel(frontend) and Render(fastAPI)
+https://nexus-agent-onqoj3flw-gokkul.vercel.app/
 ---
 
 
