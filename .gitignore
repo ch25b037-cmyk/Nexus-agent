@@ -1,0 +1,25 @@
+.env
+
+
+# 2. Python Virtual Environments & Caches
+venv/
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.pytest_cache/
+
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+static/briefings/*.mp3
+!static/briefings/.gitkeep
+test_audio.mp3
+
+# 5. OS & IDE Clutter
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
