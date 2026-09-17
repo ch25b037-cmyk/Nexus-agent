@@ -1,6 +1,9 @@
 // frontend/src/api.js
-const API_BASE = "http://127.0.0.1:8000";
+let API_BASE = "https://nexus-agent-7q8v.onrender.com";
 
+if (typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")) {
+  API_BASE = "http://127.0.0.1:8000";
+}
 /**
  * Core Request Engine:
  * Handles URL assembly, JWT bearer injection, JSON serialization, and centralized error parsing.
