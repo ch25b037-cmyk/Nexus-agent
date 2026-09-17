@@ -68,14 +68,8 @@ export default function MatchesPage({ user }) {
     let isMounted = true;
     const fetchBrowseJobs = async () => {
       try {
-        const url = selectedCategory === "All"
-          ? "http://127.0.0.1:8000/api/jobs?limit=102"
-          : `http://127.0.0.1:8000/api/jobs?category=${encodeURIComponent(selectedCategory)}&limit=102`;
-        const res = await fetch(url);
-        if (res.ok) {
-          const data = await res.json();
-          if (isMounted) setBrowseJobs(data);
-        }
+        const data = await api.getJobs(selectedCategory);
+        if (isMounted) setBrowseJobs(data || []);
       } catch (err) {
         console.error(err);
       }
